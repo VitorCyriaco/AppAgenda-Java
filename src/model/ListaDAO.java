@@ -26,4 +26,21 @@ public class ListaDAO {
             return false;
         }
     }
+    public boolean atualizarLista(Lista lista) {
+        try {
+            Connection conexao = dao.conectar();
+
+            PreparedStatement updateRow = conexao.prepareStatement("UPDATE lista SET nome = ? WHERE id = ?;");
+
+            updateRow.setString(1, lista.getNome());
+
+            int rowsAffected = updateRow.executeUpdate();
+            conexao.close();
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 }

@@ -2,7 +2,7 @@ package controller;
 
 public class Contato {
     private String nome, telefone;
-    private int lista;
+    private int id;
 
     public Contato(String nome, String telefone) {
         setNome(nome);
@@ -31,5 +31,11 @@ public class Contato {
 
     private void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    public int getId() {
+        return id;
+    }
+    private void setId(int id) {
+        this.id = id;
     }
 }

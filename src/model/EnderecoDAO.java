@@ -1,5 +1,6 @@
 package model;
 
+import controller.Contato;
 import controller.Endereco;
 
 import java.sql.Connection;
@@ -24,6 +25,31 @@ public class EnderecoDAO {
             newRow.setInt(7, endereco.getIdfkCont());
 
             int rowsAffected = newRow.executeUpdate();
+            conexao.close();
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public boolean atualizarEndereco(Endereco endereco) {
+
+        try {
+            Connection conexao = dao.conectar();
+
+            PreparedStatement updateRow = conexao.prepareStatement("UPDATE endereco SET rua = ?, numero = ?, cidade = ?, estado = ?, cep = ?, complemento = ? WHERE id = ?;");
+
+            updateRow.setString(1, endereco.getRua());
+            updateRow.setString(2, endereco.getNumero());
+            updateRow.setString(3, endereco.getCidade());
+            updateRow.setString(4, endereco.getEstado());
+            updateRow.setString(5, endereco.getCep());
+            updateRow.setString(6, endereco.getComplemento());
+            updateRow.setInt(7, endereco.getId());
+
+            int rowsAffected = updateRow.executeUpdate();
             conexao.close();
             return rowsAffected > 0;
 

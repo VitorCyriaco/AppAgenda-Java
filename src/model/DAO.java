@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DAO {
 
     String driver = "com.mysql.cj.jdbc.Driver";
-    String enderecoIp = "jdbc:mysql://10.62.55.65:3306/dbAgenda";
+    String enderecoIp = "jdbc:mysql://10.62.55.61:3306/dbAgenda";
     String usuario = "senac";
     String senha = "123@senac";
 

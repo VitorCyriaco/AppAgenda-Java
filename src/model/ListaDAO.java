@@ -18,8 +18,14 @@ public class ListaDAO {
             newRow.setString(1, lista.getNome());
 
             int rowsAffected = newRow.executeUpdate();
-            conexao.close();
-            return rowsAffected > 0;
+
+            if (rowsAffected > 0) {
+
+                conexao.close();
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception e) {
             System.out.println(e);
@@ -27,12 +33,14 @@ public class ListaDAO {
         }
     }
     public boolean atualizarLista(Lista lista) {
+
         try {
             Connection conexao = dao.conectar();
 
             PreparedStatement updateRow = conexao.prepareStatement("UPDATE lista SET nome = ? WHERE id = ?;");
 
             updateRow.setString(1, lista.getNome());
+            updateRow.setInt(2, lista.getId());
 
             int rowsAffected = updateRow.executeUpdate();
             conexao.close();

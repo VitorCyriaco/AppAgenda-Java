@@ -12,12 +12,22 @@ public class Main {
 
         while (true) {
             System.out.println("\n\n******* Escolha uma Opção *******");
-            System.out.println("\n1- Inserir/Remover Lista\n2- Novo Contato");
+            System.out.println("\n1- Inserir/Atualizar Lista\n2- Novo Contato");
             int op = sc.nextInt();
 
             switch (op) {
                 case 1:
-                    inputLista();
+                    System.out.println("1- Inserir\n2- Atualizar");
+                    int opc = sc.nextInt();
+                    if(opc == 1){
+                        inputLista();
+                        break;
+                    }else if(opc == 2){
+                        updateLista();
+                    }else {
+                        System.out.println("Opção inválida");
+                    }
+
                     break;
                 case 2:
                     inputContato();
@@ -40,15 +50,37 @@ public class Main {
     private static void inputLista() {
         System.out.println("------ NOVA LISTA ------");
         System.out.print("Nome: ");
-        String nome = sc.nextLine();
+        String nome = sc.nextLine().trim();
 
-        Lista lista = new Lista(nome);
-        boolean sucesso = listaDAO.inserirLista(lista);
+        if (nome.isEmpty()) {
+            System.out.println("Inserir algo");
+        }else{
+            Lista lista = new Lista(nome);
+            boolean sucesso = listaDAO.inserirLista(lista);
 
-        if (sucesso) {
-            lista.cadastroSucesso();
-        } else {
-            lista.cadastroErro();
+            if (sucesso) {
+                lista.cadastroSucesso();
+            } else {
+                lista.cadastroErro();
+            }
+        }
+    }
+    private static void updateLista(){
+        System.out.println("------ ATUALIZAR LISTA ------");
+        System.out.print("Nome: ");
+        String nome = sc.nextLine().trim();
+
+        if (nome.isEmpty()){
+            System.out.println("Inserir algo");
+        }else {
+            Lista lista = new Lista(nome);
+            boolean sucesso = listaDAO.atualizarLista(lista);
+
+            if (sucesso) {
+                lista.cadastroSucesso();
+            } else {
+                lista.cadastroErro();
+            }
         }
     }
 

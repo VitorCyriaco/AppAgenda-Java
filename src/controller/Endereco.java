@@ -2,7 +2,7 @@ package controller;
 
 public class Endereco {
     private String rua, numero, cidade, estado, cep, complemento;
-    private int idfkCont;
+    private int idfkCont, id;
 
     public Endereco(String rua, String numero, String cidade, String estado, String cep, String complemento, int idfkCont) {
         setRua(rua);
@@ -76,5 +76,13 @@ public class Endereco {
 
     public void setIdfkCont(int idfkCont) {
         this.idfkCont = idfkCont;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

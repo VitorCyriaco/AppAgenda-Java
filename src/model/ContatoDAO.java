@@ -1,6 +1,7 @@
 package model;
 
 import controller.Contato;
+import controller.Lista;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,5 +40,26 @@ public class ContatoDAO {
     }
     public int getId(){
         return id;
+    }
+
+    public boolean atualizarContato(Contato contato) {
+
+        try {
+            Connection conexao = dao.conectar();
+
+            PreparedStatement updateRow = conexao.prepareStatement("UPDATE contato SET nome = ?, telefone = ? WHERE id = ?;");
+
+            updateRow.setString(1, contato.getNome());
+            updateRow.setString(2, contato.getTelefone());
+            updateRow.setInt(3, contato.getId());
+
+            int rowsAffected = updateRow.executeUpdate();
+            conexao.close();
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
     }
 }

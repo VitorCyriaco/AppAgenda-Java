@@ -41,4 +41,26 @@ public class ReuniaoDAO {
     public int getId(){
         return id;
     }
+
+    public boolean atualizarReuniao(Reuniao reuniao) {
+
+        try {
+            Connection conexao = dao.conectar();
+
+            PreparedStatement updateRow = conexao.prepareStatement("UPDATE reuniao SET dataReuniao = ?, motivoReuniao = ?, link = ? WHERE id = ?;");
+
+            updateRow.setString(1, reuniao.getData());
+            updateRow.setString(2, reuniao.getMotivoReuniao());
+            updateRow.setString(3, reuniao.getLink());
+            updateRow.setInt(4, reuniao.getId());
+
+            int rowsAffected = updateRow.executeUpdate();
+            conexao.close();
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 }

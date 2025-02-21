@@ -2,6 +2,7 @@ package controller;
 
 public class Reuniao {
     private String data, motivoReuniao, link;
+    private int id;
 
     public Reuniao(String data, String motivoReuniao, String link) {
         setData(data);
@@ -39,5 +40,11 @@ public class Reuniao {
 
     public void setLink(String link) {
         this.link = link;
+    }
+    public int getId() {
+        return id;
+    }
+    private void setId(int id) {
+        this.id = id;
     }
 }
